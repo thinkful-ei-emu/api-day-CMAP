@@ -1,5 +1,5 @@
 'use strict';
-/* global shoppingList, store, Item */
+/* global shoppingList, store, Item, api */
 /*eslint-env jquery*/
 // eslint-disable-next-line no-unused-vars
 $(document).ready(function() {
@@ -9,7 +9,8 @@ $(document).ready(function() {
 
 store.items.push(Item.create('apples'));
 
-api.getItems()
-  .then(res => console.log(res));
+// api.getItems()
+//   .then(res => res.json())
+//   .then(res => console.log(res));git 
 
-console.log(api.BASE_URL);
+// console.log(api.BASE_URL);
