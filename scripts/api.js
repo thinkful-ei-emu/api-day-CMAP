@@ -26,10 +26,8 @@ let api = (function() {
   }
 
   function updateItem(id, updateData){
-    console.log(updateData);
-    console.log(id);
     let uData = JSON.stringify(updateData);
-    console.log(uData);
+
     return fetch(`${BASE_URL}/items/${id}`, {
       method: 'PATCH',
       headers: new Headers({
@@ -39,11 +37,20 @@ let api = (function() {
     });
   }
 
+  function deleteItem(id){
+    return fetch(`${BASE_URL}/items/${id}`, {
+      method: 'DELETE',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+    });
+  }
+
   return {
     getItems,
     createItem,
     updateItem,
-    //findAndUpdate
+    deleteItem
   };
 
 }());
