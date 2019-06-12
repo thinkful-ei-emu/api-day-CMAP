@@ -43,6 +43,16 @@ const shoppingList = (function(){
   
   function render() {
     // Filter item list if store prop is true by item.checked === false
+    
+    if(store.errorKey){
+      $("error-message").html(`<p> ${api.error}</p>
+      <button type="button">Click to Exit</button>`
+      );
+
+      $("error-message").removeClass("hidden");
+    }
+    
+    
     let items = [ ...store.items ];
     if (store.hideCheckedItems) {
       items = items.filter(item => !item.checked);
@@ -74,6 +84,10 @@ const shoppingList = (function(){
           store.addItem(newItem);
           console.log(newItem);
           render();
+        })
+        .catch(err => {
+          store.errorKey = `Error, try again. ${api.error}`;
+          shoppingList.render();
         });
     });
   }
@@ -97,10 +111,11 @@ const shoppingList = (function(){
         .then(() => {
           store.findAndUpdate(id, opposite);
           render();        
+        })
+        .catch(err => {
+          store.errorKey = `Error, try again. ${error.message}`;
+          shoppingList.render();
         });
-
-      // store.findAndToggleChecked(id);
-      // render();
     });
   }
   
@@ -114,6 +129,10 @@ const shoppingList = (function(){
         .then(() => {
           store.findAndDelete(id);
           render();        
+        })
+        .catch(err => {
+          store.errorKey = `Error, try again. ${api.error}`;
+          shoppingList.render();
         });
     });
   }
@@ -132,10 +151,11 @@ const shoppingList = (function(){
           store.findAndUpdate(id, newName);
           store.setItemIsEditing(id, false);
           render();        
+        })
+        .catch(err => {
+          store.errorKey = `Error, try again. ${error.message}`;
+          shoppingList.render();
         });
-      // store.findAndUpdateName(id, itemName);
-      // 
-      // render();
     });
   }
   
