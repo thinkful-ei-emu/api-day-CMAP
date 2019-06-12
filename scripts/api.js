@@ -17,12 +17,12 @@ let api = (function() {
     });
 
     return fetch(`${BASE_URL}/items`, {
-      method: "POST",
+      method: 'POST',
       headers: new Headers({
         'Content-Type': 'application/json'
       }),
       body: newItem
-    })
+    });
   }
 
 
