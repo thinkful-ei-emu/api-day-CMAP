@@ -25,7 +25,7 @@ let api = (function() {
   
         // Otherwise give back the data as resolved Promise
         return data;
-      })
+      });
   }
 
   const BASE_URL = 'https://thinkful-list-api.herokuapp.com/CMAP';

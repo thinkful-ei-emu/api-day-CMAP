@@ -45,11 +45,11 @@ const shoppingList = (function(){
     // Filter item list if store prop is true by item.checked === false
     
     if(store.errorKey){
-      $("error-message").html(`<p> ${api.error}</p>
+      $('error-message').html(`<p> ${api.error}</p>
       <button type="button">Click to Exit</button>`
       );
 
-      $("error-message").removeClass("hidden");
+      $('error-message').removeClass('hidden');
     }
     
     
@@ -79,10 +79,8 @@ const shoppingList = (function(){
       $('.js-shopping-list-entry').val('');
 
       api.createItem(newItemName)
-        .then(res => res.json())
         .then((newItem) => {
           store.addItem(newItem);
-          console.log(newItem);
           render();
         })
         .catch(err => {
@@ -107,13 +105,12 @@ const shoppingList = (function(){
       };
       
       api.updateItem(id, opposite)
-      .then(res => res.json())
         .then(() => {
           store.findAndUpdate(id, opposite);
           render();        
         })
         .catch(err => {
-          store.errorKey = `Error, try again. ${error.message}`;
+          store.errorKey = `Error, try again. ${api.error.message}`;
           shoppingList.render();
         });
     });
@@ -125,7 +122,6 @@ const shoppingList = (function(){
       const id = getItemIdFromElement(event.currentTarget);
     
       api.deleteItem(id)
-        .then(res => res.json())
         .then(() => {
           store.findAndDelete(id);
           render();        
@@ -146,14 +142,13 @@ const shoppingList = (function(){
         name: itemName,
       };
       api.updateItem(id, newName)
-        .then(res => res.json())
         .then(() => {
           store.findAndUpdate(id, newName);
           store.setItemIsEditing(id, false);
           render();        
         })
         .catch(err => {
-          store.errorKey = `Error, try again. ${error.message}`;
+          store.errorKey = `Error, try again. ${api.error.message}`;
           shoppingList.render();
         });
     });
