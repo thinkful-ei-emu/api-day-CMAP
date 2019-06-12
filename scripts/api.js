@@ -37,11 +37,11 @@ let api = (function() {
     });
   }
 
-
   return {
     getItems,
     createItem,
-    updateItem
+    updateItem,
+    //findAndUpdate
   };
 
 }());

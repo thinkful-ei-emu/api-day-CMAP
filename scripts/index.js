@@ -5,6 +5,7 @@
 $(document).ready(function() {
   shoppingList.bindEventListeners();
   shoppingList.render();
+
   api.getItems()
     .then(res => res.json())
     .then((items) => {
@@ -15,14 +16,16 @@ $(document).ready(function() {
 
 store.items.push(Item.create('apples'));
 
-api.getItems()
-  .then(res => res.json())
-  .then((items) => {
-    const item = items[0];
-    return api.updateItem(item.id, { name: 'pear', checked: true});
-  })
-  .then(res => res.json())
-  .then(() => console.log('updated!'));
+
+
+// api.getItems()
+//   .then(res => res.json())
+//   .then((items) => {
+//     const item = items[0];
+//     return api.updateItem(item.id, { name: 'pear', checked: true});
+//   })
+//   .then(res => res.json())
+//   .then(() => console.log('updated!'));
 
 // api.getItems()
 //   .then(res => res.json())
